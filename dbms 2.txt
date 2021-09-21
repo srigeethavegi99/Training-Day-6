@@ -1,0 +1,69 @@
+create table employee(ID int,employeeName varchar(200));
+create table Department(ID int,Department varchar(200));
+create table employeeDepartmentMapping(ID int,EmployeeID int, DepartmentID int);
+
+create table studentmaster(ID int,studentmasterName varchar(200));
+create table Departmentmaster(ID int,DepartmentmasterName varchar(200));
+create table studentDepartmentMapping(ID int,studentmasterID int, DepartmentmasterID int);
+
+insert into studentmaster(ID,studentmasterName) values(1,'Ashley');
+insert into studentmaster(ID,studentmasterName) values(2,'Julia');
+insert into studentmaster(ID,studentmasterName) values(3,'Bella');
+insert into studentmaster(ID,studentmasterName) values(4,'chelsea');
+
+insert into Departmentmaster(ID,DepartmentmasterName) values(1,'cse');
+insert into Departmentmaster(ID,DepartmentmasterName) values(2,'IT');
+insert into Departmentmaster(ID,DepartmentmasterName) values(3,'Petroleum');
+insert into Departmentmaster(ID,DepartmentmasterName) values(4,'Chemical');
+
+insert into studentDepartmentMapping(ID,studentmasterID,DepartmentmasterID) values(1,4,1);
+insert into studentDepartmentMapping(ID,studentmasterID,DepartmentmasterID) values(2,2,3);
+insert into studentDepartmentMapping(ID,studentmasterID,DepartmentmasterID) values(3,2,4);
+insert into studentDepartmentMapping(ID,studentmasterID,DepartmentmasterID) values(4,1,2);
+
+select * from studentmaster;
+select * from Departmentmaster;
+select * from studentDepartmentMapping;
+
+--cartisian join
+select studentmasterName,DepartmentmasterName from studentmaster,Departmentmaster;
+
+--Equi join
+select studentmasterName,DepartmentmasterID from studentmaster,studentDepartmentMapping where studentmaster.ID=studentDepartmentMapping.studentmasterID;
+
+--non-equi join
+select studentmasterName,DepartmentmasterID from studentmaster,studentDepartmentMapping where studentmaster.ID Between 1 AND 2;
+
+--outer join
+select studentmasterName,DepartmentmasterID from studentmaster,studentDepartmentMapping where studentmaster.ID(+)=studentDepartmentMapping.studentmasterID;
+
+--Natural join
+select studentmasterName,DepartmentmasterID from studentmaster Natural join studentDepartmentMapping
+
+select DEPARTMENT_ID,DEPARTMENT_NAME from  HR.DEPARTMENTS DEPT where EXISTS (select DEPARTMENT_ID from  HR.EMPLOYEES EMP where EMP.DEPARTMENT_ID=DEPT.DEPARTMENT_ID )
+
+
+create table xyz(ID int NOT NULL,Text Varchar2(200) NOT NULL,CreatedOn Date default sysdate);
+insert into xyz(ID,TEXT) values(1,'madhu');
+insert into xyz(ID) values(2);
+select * from xyz
+
+create table abc(ID int NOT NULL,Text Varchar2(200),SampleValue Number(2,2),CreatedOn Date default sysdate,CONSTRAINT ID_UK UNIQUE(ID) );
+insert into abc(ID,TEXT) values(1,'anu');
+select * from abc
+
+create table def(ID int CONSTRAINT ID_PK PRIMARY KEY,Text Varchar2(200) );
+insert into def(ID,Text) values(2,'teja')
+select * from def
+
+alter table abc add(xvalue int);
+select * from abc;
+alter table abc Modify(SampleValue int);
+select * from abc;
+alter table abc drop COLUMN XVALUE;
+
+drop table abc
+RENAME def to zxc
+truncate table zxc
+select * from zxc
+ 
